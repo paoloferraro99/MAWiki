@@ -45,7 +45,17 @@ users = User.all
 		user:     users.sample,
 		title:    Faker::Lorem.sentence,
 		outline:  Faker::Lorem.sentence,
-		body:     Faker::Lorem.paragraph
+		body:     Faker::Lorem.paragraph,
+		public:   true
+	)
+end
+50.times do
+	Wiki.create!(
+		user:     users.sample,
+		title:    Faker::Lorem.sentence,
+		outline:  Faker::Lorem.sentence,
+		body:     Faker::Lorem.paragraph,
+		public:   false
 	)
 end
 wikis = Wiki.all

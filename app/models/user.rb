@@ -5,6 +5,12 @@ class User < ActiveRecord::Base
 			:recoverable, :rememberable, :trackable, :validatable, :confirmable
 		 
 	has_many :wikis
+	
+	scope :visible_to, -> (user) { user ? all : where(public: true) }
+	
+	def premium?
+		role == 'premium'
+	end
 
 		 
 end
