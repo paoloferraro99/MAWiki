@@ -8,7 +8,7 @@ MAWiki::Application.routes.draw do
 						# get "wikis/show"
 						# get "wikis/edit"
 	resources :wikis
-  resource :plan, only: [:new, :create]
+  resource :plans, only: [:new, :create]
   resources :charges, only: [:new, :create]
 
 						# get "home/index"
