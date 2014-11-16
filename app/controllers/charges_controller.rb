@@ -25,6 +25,7 @@ class ChargesController < ApplicationController
    )
  
    flash[:success] = "Thanks for all the money, #{current_user.email}! Feel free to pay me again."
+   current_user.update_attribute(:role, 'premium')
    redirect_to wikis_path # or wherever
  
  # Stripe will send back CardErrors, with friendly messages
