@@ -32,6 +32,8 @@ gem 'pundit'
 
 gem 'redcarpet'
 
+gem 'stripe'
+
 
 
 					# Use Uglifier as compressor for JavaScript assets

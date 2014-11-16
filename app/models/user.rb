@@ -8,9 +8,9 @@ class User < ActiveRecord::Base
 	
 	scope :visible_to, -> (user) { user ? all : where(public: true) }
 	
-	def free?
-		role == 'free'
-	end
+	# def free?
+	# 	role == 'free'
+	# end
 
 	def premium?
 		role == 'premium'

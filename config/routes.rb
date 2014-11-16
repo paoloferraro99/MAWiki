@@ -1,5 +1,6 @@
 MAWiki::Application.routes.draw do
 	
+  
 	devise_for :users
 	
 						# get "wikis/index"
@@ -8,6 +9,8 @@ MAWiki::Application.routes.draw do
 						# get "wikis/edit"
 	resources :wikis
   resource :plan, only: [:new, :create]
+  resources :charges, only: [:new, :create]
+
 						# get "home/index"
 	root to: 'home#index'    
   
