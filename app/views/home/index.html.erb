@@ -3,7 +3,13 @@
   <h1>MAWiki</h1>
   <p>Create public and private Markdown-based wikis.</p>
   <p>
-		<%= link_to "Sign Up", new_plans_path, class: 'btn btn-primary' %> today!
+    <% if current_user == nil %>
+		  <%= link_to "Sign Up", new_plans_path, class: 'btn btn-primary' %>
+    <% elsif current_user && current_user.role != 'premium' %>
+      You are a basic member <%= link_to "Upgrade", new_plans_path, class: 'btn btn-primary' %> today!
+      <% elsif current_user && current_user.role == 'premium' %>
+      You are a premium member.
+    <% end %>
   </p>
 </div>
 
