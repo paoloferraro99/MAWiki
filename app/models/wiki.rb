@@ -4,5 +4,8 @@ class Wiki < ActiveRecord::Base
 	
 	# default_scope :order => 'wiki.title ASC'
 
+   has_many :collaborations
+   has_many :users, through: :collaborations
+
 	
 end

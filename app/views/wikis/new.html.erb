@@ -21,12 +21,15 @@
 				<%= f.text_area :body, rows: 12, class: 'form-control', placeholder: "Go further in depth according to outline" %>
 			</div>
 		   
-		   <% if current_user.role == 'premium' %>
+			<% if current_user.role == 'premium' %>
 		   	<div class="form-group">
-				<%= f.label :public %>
-				<%= f.check_box :public, class: 'form-control' %>
-			</div>
-			<% end %>
+					<%= f.label :public %> - uncheck to make private
+					<%= f.check_box :public, class: 'form-control' %>
+				</div>
+
+				
+      	<% end %>
+
 
 			<div class="form-group">
 				<%= f.submit "Save", class: 'btn btn-success' %>
