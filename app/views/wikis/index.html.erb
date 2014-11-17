@@ -5,9 +5,7 @@
 <% if policy(Wiki.new).create? %>
 	<%= link_to "Create Wiki", new_wiki_path(@wiki), class: 'btn btn-success' %>
 <% end %>
-<% if policy(Wiki.new).create? %>
-	<%= link_to "Create Private Wiki", new_wiki_path(@wiki), class: 'btn btn-danger' %>
-<% end %>
+
 
 <% @wikis.each do |wiki| %>
 	<div class="media">

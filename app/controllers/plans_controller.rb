@@ -22,6 +22,7 @@ def new
   end
 
   def create
+    @amount = 99
 
 # Creates a Stripe Customer object, for associating
    # with the charge
@@ -33,12 +34,12 @@ def new
    # Where the real magic happens
    charge = Stripe::Charge.create(
      customer: customer.id, # Note -- this is NOT the user_id in your app
-     amount: 99,
+     amount: @amount,
      description: "Premium Membership - #{current_user.email}",
      currency: 'usd'
    )
  
-   flash[:success] = "Thanks for all the money, #{current_user.email}! Feel free to pay me again."
+   flash[:notice] = "Thanks for all the money, #{current_user.email}! Feel free to pay me again."
    current_user.update_attribute(:role, 'premium')
    redirect_to wikis_path # or wherever
  
@@ -47,7 +48,7 @@ def new
  # This `rescue block` catches and displays those errors.
  rescue Stripe::CardError => e
    flash[:error] = e.message
-   redirect_to new_charge_path
+   redirect_to new_plans_path
 
   end
 
@@ -57,8 +58,6 @@ def check_membership
   if current_user && current_user.role == 'premium'
     # flash[:notice] = "Congratulations, you are a premium member."
     redirect_to wikis_path, notice: "Congratulations, you are a premium member!"
-  # elsif current_user
-  #   redirect_to new_charge_path
   elsif current_user == nil
     redirect_to new_user_registration_path
   end
