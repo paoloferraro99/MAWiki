@@ -21,11 +21,11 @@ class WikisController < ApplicationController
 		@wiki = current_user.wikis.build(wiki_params)
 		# @wiki = Wiki.new(wiki_params)
 		@wiki.user = current_user
-      
+
 		if params[:user_ids]
       	@wiki.users = User.find(params[:user_ids]) 
     	else
-    		@wiki.users = current_user
+    		@wiki.users = []
    	end
 
 		if @wiki.save
