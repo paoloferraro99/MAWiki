@@ -7,6 +7,7 @@ class WikisController < ApplicationController
 	end
 	
 	def show
+      # check_membership
 		@wiki = Wiki.find(params[:id])
 		@collaborations = @wiki.users
 	end
@@ -40,8 +41,8 @@ class WikisController < ApplicationController
 	def edit
 		@wiki = Wiki.find(params[:id])
 		@users = User.all_except(current_user)
+      @collaborations = @wiki.collaborations
 		authorize @wiki
-		@collaborations = @wiki.collaborations
 	end
 	
 	def update
@@ -71,5 +72,14 @@ class WikisController < ApplicationController
   	def wiki_params
    	params.require(:wiki).permit(:title, :outline, :body, :public)
 	 end
-	
+
+	def check_membership
+      if current_user == nil && wiki.public? == false
+         redirect_to new_user_registration_path
+         flash[:notice] = "Premium members can see private wikis."
+      elsif current_user && wiki.public? == false
+         redirect_to new_plans_path
+         flash[:notice] = "Premium members can see private wikis."
+      end
+   end
 end

@@ -1,5 +1,5 @@
 class ApplicationPolicy
-	attr_reader :user, :record
+	attr_reader :user, :record, :collaboration
 	
 	def initialize(user, record)
 		@user = user
@@ -23,7 +23,7 @@ class ApplicationPolicy
 	end
 	
 	def update?
-		user.present? && (record.user == user)
+		user.present? && (record.user == user || record.users.include?(user))
 	end
 	
 	def edit?
