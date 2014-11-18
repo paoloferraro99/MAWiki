@@ -23,6 +23,9 @@ class WikisController < ApplicationController
 		# @wiki = Wiki.new(wiki_params)
 		@wiki.user = current_user
 
+      #miki user = User.sample
+      #     @wiki.users << user
+      #     user.collaborations.where(:user_id => user.id, :wiki_id => @wiki.id).destroy
 		if params[:user_ids]
       	@wiki.users = User.find(params[:user_ids]) 
     	else
@@ -74,7 +77,7 @@ class WikisController < ApplicationController
 	 end
 
 	def check_membership
-      if current_user == nil && wiki.public? == false
+      if current_user == nil && !wiki.public?
          redirect_to new_user_registration_path
          flash[:notice] = "Premium members can see private wikis."
       elsif current_user && wiki.public? == false

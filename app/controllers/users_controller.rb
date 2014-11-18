@@ -8,6 +8,7 @@ class UsersController < ApplicationController
    def show
       @user = User.find(params[:id])
       @wikis = @user.wikis
+      # miki @collaborated_wikis = Wiki
    end
 
    def update
