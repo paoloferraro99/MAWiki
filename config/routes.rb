@@ -9,7 +9,7 @@ MAWiki::Application.routes.draw do
 						# get "wikis/edit"
 	resources :wikis
   resource :plans, only: [:new, :create]
-  resources :collaborations, only: [:create]
+
 
 						# get "home/index"
 	root to: 'home#index'    
