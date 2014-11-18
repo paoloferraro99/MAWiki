@@ -52,7 +52,7 @@ def new
 
   end
 
-
+private
 def check_membership
 
   if current_user && current_user.role == 'premium'

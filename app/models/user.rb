@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
 			:recoverable, :rememberable, :trackable, :validatable, :confirmable
 		 
 	has_many :collaborations
-	has_many :wikis, through: :collaborations
+	has_many :wikis
+	# has_many :wikis, through: :collaborations
 
 	
 	scope :visible_to, -> (user) { user ? all : where(public: true) }

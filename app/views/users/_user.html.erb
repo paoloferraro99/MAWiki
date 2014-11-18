@@ -1,0 +1,12 @@
+<div class="media">
+      
+   <div class="media-body">
+      <h4 class="media-heading">
+         <%= link_to user.name, user %>
+      </h4>
+      <small>
+         <%= pluralize(user.wikis.count, 'wiki') %>
+         
+      </small>
+   </div>
+</div>

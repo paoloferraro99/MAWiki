@@ -1,13 +1,18 @@
 MAWiki::Application.routes.draw do
-	
-  
+
 	devise_for :users
+
+            # get "users/index"
+            # get "users/show"
+            # get "users/update"
+  resources :users, only: [:update, :show, :index]
 	
 						# get "wikis/index"
 						# get "wikis/new"
 						# get "wikis/show"
 						# get "wikis/edit"
 	resources :wikis
+
   resource :plans, only: [:new, :create]
 
 
