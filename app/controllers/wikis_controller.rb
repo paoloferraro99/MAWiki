@@ -8,16 +8,19 @@ class WikisController < ApplicationController
 	
 	def show
 		@wiki = Wiki.find(params[:id])
+		@collaborations = @wiki.users
 	end
 	
 	def new
 		@wiki = Wiki.new
+		@users = User.all_except(current_user)
 		authorize @wiki
 	end
 	
 	def create
-		@wiki = current_user.wikis.build(params.require(:wiki).permit(:title, :outline, :body, :public))
-		authorize @wiki
+		# @wiki = current_user.wikis.build(wiki_params)
+		@wiki = Wiki.new(wiki_params)
+		@wiki.user = current_user
 		if @wiki.save
 			flash[:notice] = "Your wiki was saved."
 			redirect_to @wiki
@@ -29,13 +32,15 @@ class WikisController < ApplicationController
 	
 	def edit
 		@wiki = Wiki.find(params[:id])
+		@users = User.all_except(current_user)
 		authorize @wiki
+		@collaborations = @wiki.collaborations
 	end
 	
 	def update
 		@wiki = Wiki.find(params[:id])
 		authorize @wiki
-		if @wiki.update_attributes(params.require(:wiki).permit(:title, :outline, :body, :public))
+		if @wiki.update_attributes(wiki_params)
 			flash[:notice] = "Your wiki was updated."
 			redirect_to @wiki
 		else
@@ -43,5 +48,13 @@ class WikisController < ApplicationController
 			render :edit
      end
    end
+
+   private 
+
+
+
+  def wiki_params
+    params.require(:wiki).permit(:title, :outline, :body, :public)
+ end
 	
 end

@@ -2,6 +2,16 @@
 <p><%= markdown @wiki.outline %></p>
 <p><%= markdown @wiki.body %></p>
 
+
+
 <% if policy(@wiki).edit? %>
 	<%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success' %>
 <% end %>
+
+<div class="col-md-8">
+    Collaborators:
+    <% @collaborations.each do |collaboration| %>
+      <br/><%= collaboration.name %> ( <%= collaboration.email %> )
+    <% end %>
+    <% if @collaborations.empty? %>none<% end %>
+  </div>
