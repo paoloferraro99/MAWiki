@@ -26,7 +26,7 @@ class WikisController < ApplicationController
     	else
     		@wiki.users = []
    	 end
-   	 
+
 		if @wiki.save
 			flash[:notice] = "Your wiki was saved."
 			redirect_to @wiki
@@ -55,12 +55,20 @@ class WikisController < ApplicationController
      end
    end
 
+  	def destroy
+    	@wiki = Wiki.find(params[:id])
+    	if @wiki.destroy
+      	flash[:notice] = "Your wiki was deleted." 
+    	else
+      	flash[:error] = 'There was an error deleting your wiki.  Try again.' 
+    	end
+    	redirect_to wikis_path
+  	end
+
    private 
 
-
-
-  def wiki_params
-    params.require(:wiki).permit(:title, :outline, :body, :public)
- end
+  	def wiki_params
+   	params.require(:wiki).permit(:title, :outline, :body, :public)
+	 end
 	
 end
