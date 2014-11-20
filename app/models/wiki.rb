@@ -9,7 +9,13 @@ class Wiki < ActiveRecord::Base
 	
 	# default_scope :order => 'wiki.title ASC'
 
-   
+   # def collaborator_name
+   #    user.try(:name)
+   # end
+
+   # def collaborator_name=(name)
+   #    self.user = User.find_by_name(name) if name.present?
+   # end
 
 
    # validates :title, length: { minimum: 5 }, presence: true

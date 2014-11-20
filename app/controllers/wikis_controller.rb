@@ -23,14 +23,22 @@ class WikisController < ApplicationController
 		# @wiki = Wiki.new(wiki_params)
 		@wiki.user = current_user
 
-      #miki user = User.sample
-      #     @wiki.users << user
-      #     user.collaborations.where(:user_id => user.id, :wiki_id => @wiki.id).destroy
-		if params[:user_ids]
-      	@wiki.users = User.find(params[:user_ids]) 
-    	else
-    		@wiki.users = []
-   	end
+
+
+      #miki
+      # user = User.sample
+      # @wiki.users << user
+      # user.collaborations.where(:user_id => user.id, :wiki_id => @wiki.id).destroy
+		
+
+
+      # THIS SHIT ADDS TO COLLAB
+             #   if params[:user_ids]
+             #   	@wiki.users = User.find(params[:user_ids]) 
+             # 	else
+             # 		@wiki.users = []
+            	# end
+      # ##############
 
 		if @wiki.save
 			flash[:notice] = "Your wiki was saved."
@@ -44,13 +52,19 @@ class WikisController < ApplicationController
 	def edit
 		@wiki = Wiki.find(params[:id])
 		@users = User.all_except(current_user)
-      @collaborations = @wiki.collaborations
 		authorize @wiki
+      @collaborations = @wiki.collaborations
 	end
 	
 	def update
 		@wiki = Wiki.find(params[:id])
 		authorize @wiki
+# THIS SHIT ADDS TO COLLAB
+         #    @wiki.users = User.find(params[:user_ids]) 
+         # else
+         #    @wiki.users = []
+         # end
+# #############
 		if @wiki.update_attributes(wiki_params)
 			flash[:notice] = "Your wiki was updated."
 			redirect_to @wiki
@@ -80,8 +94,7 @@ class WikisController < ApplicationController
       if current_user == nil && !wiki.public?
          redirect_to new_user_registration_path
          flash[:notice] = "Premium members can see private wikis."
-      elsif current_user && wiki.public? == false
-         redirect_to new_plans_path
+      elsif current_user && !swiki.public?
          flash[:notice] = "Premium members can see private wikis."
       end
    end

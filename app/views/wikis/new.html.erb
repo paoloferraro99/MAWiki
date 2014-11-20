@@ -26,32 +26,21 @@
 					<%= f.label :public %> - uncheck to make private
 					<%= f.check_box :public, class: 'form-control' %>
 				</div>
+
+
+
+
+
+				<!-- <div class="form-group">
+				<%= f.label :collaborator_name %>
+				<%= f.text_field :collaborator_name %>
+				</div> -->
       	
 
 
 
-		    	<br/>
-		    	<h4>Add collaborators: </h4>
-		    	<table class="table">
-		      	<tr>
-			        <th>Name</th>
-			        <th>Email</th>
-			        <th>Give Access</th>
-		      	</tr>
 
-		      <%= hidden_field_tag :wiki_id, @wiki.id %>
-
-		      <% @users.each do |user| %>
-		        	<tr>
-		          	<td><%= user.name %></td>
-		         	<td><%= user.email %></td>
-		          	<td>
-		            	<%= check_box_tag "user_ids[]", user.id,
-		              		@wiki.collaborations.where(user_id: user.id).any? %>
-		          		</td>
-		        	</tr>
-		     	<% end %>
-		   </table>
+		    	
 
 	   <% end %>
 

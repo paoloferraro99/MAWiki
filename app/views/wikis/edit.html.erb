@@ -8,8 +8,7 @@
 		    <div class="form-group">
 				<%= f.label :title %>
 				<%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>
-			</div
->		   
+			</div>		   
 			<div class="form-group">
 				<%= f.label :outline %>
 				<%= f.text_area :outline, rows: 5, class: 'form-control', placeholder: "Make an outline" %>
@@ -30,6 +29,18 @@
 
 
 
+
+	   <% end %>
+
+
+			<div class="form-group">
+				<%= f.submit "Save", class: 'btn btn-success' %>
+			</div>
+		<% end %>
+
+
+
+<%= form_tag '/collaborations' do %>
 		    	<br/>
 		    	<h4>Add collaborators: </h4>
 		    	<table class="table">
@@ -52,15 +63,8 @@
 		        	</tr>
 		     	<% end %>
 		   </table>
-
-	   <% end %>
-
-
-			<div class="form-group">
-				<%= f.submit "Save", class: 'btn btn-success' %>
-			</div>
-		<% end %>
-
+		   <p> <%= submit_tag 'Add Collaborators', class: 'btn btn-info' %> 
+  <% end %>
 
 
 	</div>
