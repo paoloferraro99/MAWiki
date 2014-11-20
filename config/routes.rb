@@ -12,7 +12,7 @@ MAWiki::Application.routes.draw do
 						# get "wikis/show"
 						# get "wikis/edit"
 	resources :wikis
-  resources :collaborations, only: [:create]
+  resources :collaborations, only: [:create, :destroy]
 
   resource :plans, only: [:new, :create]
 

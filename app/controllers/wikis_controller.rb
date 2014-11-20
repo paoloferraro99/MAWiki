@@ -94,7 +94,7 @@ class WikisController < ApplicationController
       if current_user == nil && !wiki.public?
          redirect_to new_user_registration_path
          flash[:notice] = "Premium members can see private wikis."
-      elsif current_user && !swiki.public?
+      elsif current_user && !wiki.public?
          flash[:notice] = "Premium members can see private wikis."
       end
    end

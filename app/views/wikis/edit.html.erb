@@ -40,15 +40,15 @@
 
 
 
-<%= form_tag '/collaborations' do %>
-		    	<br/>
-		    	<h4>Add collaborators: </h4>
-		    	<table class="table">
-		      	<tr>
-			        <th>Name</th>
-			        <th>Email</th>
-			        <th>Give Access</th>
-		      	</tr>
+		<%= form_tag '/collaborations' do %>
+	    	<br/>
+	    	<h4>Add collaborators: </h4>
+	    	<table class="table">
+	      	<tr>
+		        <th>Name</th>
+		        <th>Email</th>
+		        <th>Give Access</th>
+	      	</tr>
 
 		      <%= hidden_field_tag :wiki_id, @wiki.id %>
 
@@ -61,11 +61,22 @@
 		              		@wiki.collaborations.where(user_id: user.id).any? %>
 		          		</td>
 		        	</tr>
+
 		     	<% end %>
 		   </table>
 		   <p> <%= submit_tag 'Add Collaborators', class: 'btn btn-info' %> 
-  <% end %>
 
+		<% end %>
+
+
+  <!-- experiment -->
+  		<% @wiki.collaborations.each do |collaboration| %>
+
+       	<li><%= collaboration.user.name %> <%= link_to "Delete", collaboration_path(collaboration), method: :delete %></li>
+        
+      <% end %>
+<!-- experiment -->
+  
 
 	</div>
 	

@@ -12,6 +12,14 @@ class CollaborationsController < ApplicationController
     redirect_to @wiki, notice: 'Successfully added collaborators' 
   end    
 
+
+  def destroy
+    @collaboration = Collaboration.find(params[:id])
+    @collaboration.destroy
+    flash[:notice] = "Collaborator successfully removed."
+    redirect_to @collaboration.wiki
+  end
+
 end
 #miki user = User.sample
       #     @wiki.users << user
