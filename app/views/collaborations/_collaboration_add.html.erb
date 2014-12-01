@@ -1,0 +1,11 @@
+<%= form_for Collaboration.new do |f| %>
+   <div class="form-group">
+      <%= f.label :user_email %>
+      <%= f.text_field :user_email, class: 'form-control', placeholder: "Enter an email to add" %>
+   </div>
+
+   <%= f.hidden_field :wiki_id, value: @wiki.id %>
+   <div class="form-group">
+      <%= f.submit "Add Collaborator", class: 'btn btn-success' %>
+   </div>
+<% end %>

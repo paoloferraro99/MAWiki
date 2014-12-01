@@ -1,12 +1,13 @@
 class CollaborationsController < ApplicationController  
   
   def create
-    @wiki = Wiki.find(params[:wiki_id])
+    @wiki = Wiki.find(params[:collaboration][:wiki_id])
 
-    if params[:user_ids]
-      @wiki.users = User.find(params[:user_ids]) 
-    else
-      @wiki.users = []
+    if params[:collaboration][:user_email].present?
+      user = User.where(:email => params[:collaboration][:user_email]).first
+      if user.present? && @wiki.collaborations.where(:user_id => user.id).first.blank?
+        @wiki.users << user
+      end
     end
 
     redirect_to @wiki, notice: 'Successfully added collaborators' 

@@ -1,8 +1,7 @@
 class WikisController < ApplicationController
 	
 	def index
-		@wikis = Wiki.all
-		# @wikis = Wiki.visible_to(current_user)
+		@wikis = Wiki.paginate(page: params[:page], per_page: 10)
 		authorize @wikis
 	end
 	
@@ -23,23 +22,6 @@ class WikisController < ApplicationController
 		# @wiki = Wiki.new(wiki_params)
 		@wiki.user = current_user
 
-
-
-      #miki
-      # user = User.sample
-      # @wiki.users << user
-      # user.collaborations.where(:user_id => user.id, :wiki_id => @wiki.id).destroy
-		
-
-
-      # THIS SHIT ADDS TO COLLAB
-             #   if params[:user_ids]
-             #   	@wiki.users = User.find(params[:user_ids]) 
-             # 	else
-             # 		@wiki.users = []
-            	# end
-      # ##############
-
 		if @wiki.save
 			flash[:notice] = "Your wiki was saved."
 			redirect_to @wiki
@@ -59,12 +41,7 @@ class WikisController < ApplicationController
 	def update
 		@wiki = Wiki.find(params[:id])
 		authorize @wiki
-# THIS SHIT ADDS TO COLLAB
-         #    @wiki.users = User.find(params[:user_ids]) 
-         # else
-         #    @wiki.users = []
-         # end
-# #############
+
 		if @wiki.update_attributes(wiki_params)
 			flash[:notice] = "Your wiki was updated."
 			redirect_to @wiki

@@ -71,9 +71,9 @@
 
   <!-- experiment -->
   		<% @wiki.collaborations.each do |collaboration| %>
-
-       	<li><%= collaboration.user.name %> <%= link_to "Delete", collaboration_path(collaboration), method: :delete %></li>
-        
+       	<li>
+       		<%= collaboration.user.name %> <%= link_to "Delete", collaboration_path(collaboration), method: :delete %>
+       	</li>
       <% end %>
 <!-- experiment -->
   
@@ -82,3 +82,4 @@
 	
 </div>
  
+ <%= render 'collaborations/collaboration_add' %> 

@@ -1,11 +1,8 @@
-
-
 <h1>Wikis</h1>
 
 <% if policy(Wiki.new).create? %>
 	<%= link_to "Create Wiki", new_wiki_path(@wiki), class: 'btn btn-success' %>
 <% end %>
-
 
 <% @wikis.each do |wiki| %>
 	<div class="media">
@@ -19,11 +16,11 @@
 			<small>
 				Public = <%= wiki.public? %>
 			</small>
-	
 		</div>
 	</div>
-	
 <% end %>
-
+<div class="col-md-6 col-md-offset-3">
+	<%= will_paginate @users %>
+</div>
 	
 
