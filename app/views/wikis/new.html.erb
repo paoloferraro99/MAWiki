@@ -20,14 +20,12 @@
 				<%= f.text_area :body, rows: 12, class: 'form-control', placeholder: "Go further in depth according to outline" %>
 			</div>
 
-		   
 			<% if current_user.role == 'premium' %>
-			
+
 		   	<div class="form-group">
 					<%= f.label :public %> - uncheck to make private
 					<%= f.check_box :public, class: 'form-control' %>
 				</div>
-
 
 	   	<% end %>
 
@@ -37,6 +35,31 @@
 			</div>
 		<% end %>
 
+	</div>
+	<div class="col-md-4">
+		<h4>You can style Wikis with <%= link_to "Markdown", "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" %>:</h4>
+		<ul>
+			<li>You can create headers:
+			<ul>
+					<li><h3>h1</h3></li>
+					<li><h4>h2</h4></li>
+					<li><h5>h3</h5></li>
+				</ul>
+			</li>
+			<li>You can create lists:
+				<ul>
+					<li>First item</li>
+					<li>Second item</li>
+					<li>Third item</li>
+				</ul>
+			</li>
+			<li>You can add links:
+				<ul>
+					<li>Read more about <%= link_to "Markdown", "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" %></li>
+				</ul>
+			</li>
+			<li>Plus a whole lot <%= link_to "more", "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" %>...</li>
+		</ul>
 	</div>
 	
 </div>
