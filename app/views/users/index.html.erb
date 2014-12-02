@@ -1,9 +1,16 @@
 
+<div class="page-header">
+<h1>Users</h1>
+</div>
 
-      <h1>Users</h1>
-      <%= render partial: 'users/user', collection: @users %>
-      <div class="col-md-6 col-md-offset-3">
+<%= render partial: 'users/user', collection: @users %>
+
+
+
+      <div class="apple_pagination">
          <%= will_paginate @users %>
       </div>
+
+
 
 
