@@ -1,4 +1,6 @@
-class CollaborationsController < ApplicationController  
+class CollaborationsController < ApplicationController
+
+  respond_to :html, :js
   
   def create
     @wiki = Wiki.find(params[:collaboration][:wiki_id])
@@ -16,9 +18,17 @@ class CollaborationsController < ApplicationController
 
   def destroy
     @collaboration = Collaboration.find(params[:id])
-    @collaboration.destroy
-    flash[:notice] = "Collaborator successfully removed."
-    redirect_to @collaboration.wiki
+    if @collaboration.destroy
+      flash[:notice] = "Collaborator successfully removed."
+      # redirect_to @collaboration.wiki
+    else
+      flash[:error] = "Collaborator not removed.  Try again please,"
+    end
+
+    respond_with(@collaboration) do |format|
+      format.html { redirect_to @collaboration }
+    end
+
   end
 
 end
