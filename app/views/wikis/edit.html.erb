@@ -54,7 +54,7 @@
 					<li>Read more about <%= link_to "Markdown", "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" %></li>
 				</ul>
 			</li>
-			<li>Plus a whole lot <%= link_to "more", "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" %>...</li>
+			<li>Plus a whole lot <%= link_to "more...", "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" %></li>
 		</ul>
 	</div>
 	
@@ -76,8 +76,36 @@
 		</li>
 		<% end %>
 
-<%= collection_select :user_id, :id, :email %>
-
 	</div>
-
 </div>
+
+
+<!-- testtesttest -->
+<h1>test only - REFERENCE - test only</h1>
+<%= form_tag '/collaborations' do %>
+         <br/>
+         <h4>Users: </h4>
+         <table class="table">
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Give Access</th>
+            </tr>
+
+            <%= hidden_field_tag :wiki_id, value: @wiki.id %>
+
+
+            <% @users.each do |user| %>
+               <tr>
+                  <td><%= user.name %></td>
+                  <td><%= user.email %></td>
+                  <td>
+                     <%= check_box_tag "user_ids[]", user.id,
+                        @wiki.collaborations.where(user_id: user.id).any? %>
+                     </td>
+               </tr>
+
+            <% end %>
+         </table>
+      <% end %>
+      <!-- testtesttest -->
