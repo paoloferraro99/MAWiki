@@ -1,15 +1,30 @@
 <br/>
 <div class="jumbotron">
   <h1>MAWiki</h1>
-  <p>Create public and private Markdown-based wikis.</p>
+  <p>Your number one source for Wiki creation.</p>
   <p>
     <% if current_user == nil %>
-		  <%= link_to "Sign Up", new_plans_path, class: 'btn btn-primary' %>
+		  <%= link_to "Sign Up Today!", new_plans_path, class: 'btn btn-primary' %>
     <% elsif current_user && current_user.role != 'premium' %>
-      You are a basic member <%= link_to "Upgrade", new_plans_path, class: 'btn btn-primary' %> today!
+      You are a basic member <%= link_to "Upgrade Today!", new_plans_path, class: 'btn btn-primary' %> today!
       <% elsif current_user && current_user.role == 'premium' %>
-      You are a premium member.
+      <span class="text-success">Congratulations!</span> You are a <span class="text-success">Premium</span> Member.</p>
     <% end %>
   </p>
 </div>
+<div>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-2">
+      <h2 class="text-center">Become a <span class="text-warning">Member</span></h2><br>
+      <h4 class="text-center">Create unlimited public wikis!</h4><br>
+      
+    </div>
+    <div class="col-md-4">
+      <h2 class="text-center">Become a <span class="text-success">Premium</span> Member</h2><br>
+      <h4 class="text-center">Create private wikis with collaborators!</h4><br>
+
+      
+    </div>
+  </div>
+</div> 
 

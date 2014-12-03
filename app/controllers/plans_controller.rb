@@ -1,6 +1,5 @@
 class PlansController < ApplicationController
 
-
   before_action :check_membership
 
 # new
