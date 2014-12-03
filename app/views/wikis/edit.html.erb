@@ -72,7 +72,7 @@
 	<div class="col-md-4" style="margin-top:45px">
 		<% @wiki.collaborations.each do |collaboration| %>
 		<li>
-			<%= collaboration.user.name %> ( <%= collaboration.user.email %> )<%= link_to "Delete", collaboration_path(collaboration), method: :delete, remote: true %>
+			<%= collaboration.user.name %> ( <%= collaboration.user.email %> )<%= link_to "Delete", collaboration_path(collaboration), method: :delete %>
 		</li>
 		<% end %>
 
