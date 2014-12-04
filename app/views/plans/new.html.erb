@@ -1,7 +1,11 @@
-<h1>Hello <%= current_user.email %>! Don't wait to:</h1>
-<h2>Sign up for a premium membership</h2>
+<h1 class="text-center">Hello <%= current_user.name || current_user.email %>!</h1>
+<h2 class="text-center">Premium members can create UNLIMITED Private wikis with Collaborators!</h2>
+<h2 class="text-center">Sign up for a <span class="text-success">Premium Membership</span> today!</h2>
+<h2 class="text-center">It's less than a dollar!</h2>
+<div class="text-center">
 <%= form_tag plans_path do %>
    
       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="<%= @stripe_btn_data[:key] %>" data-amount=<%= @stripe_btn_data[:amount] %> data-description="<%= @stripe_btn_data[:description] %>" ></script>
 
  <% end %>
+</div>

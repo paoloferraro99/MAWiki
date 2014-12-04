@@ -8,47 +8,68 @@
 </head>
 <body>
 	<div class="container">
+    <div class="navbar navbar-default">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="<%= root_path %>">MAWiki</a>
+      </div>
 
-		<ul class="nav nav-tabs">
-			<li><%= link_to "MAWiki", root_path %></li>
-      <li><%= link_to "Wikis", wikis_path %></li>
-      <li><%= link_to "Users", users_path %></li>
-			
-			
-			<div class="pull-right user-info">
-				<% if current_user %>
-					
-          Hello <%= link_to (current_user.name || current_user.email), current_user %>!
-          <%= link_to "Account", edit_user_registration_path %>
-            
-          <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-            
-				<% else %>
-					<%= link_to "Sign In", new_user_session_path %> or 
-					<%= link_to "Sign Up", new_user_registration_path %>
-				<% end %>
-			</div>
-		
-		</ul>
+
+      <div class="navbar-collapse collapse navbar-responsive-collapse">
+
+
+        <ul class="nav navbar-nav">
+          <li><%= link_to "Wikis", wikis_path %></li>
+
+          <li><%= link_to "Users", users_path %></li>
+        </ul>
+
+
+        <ul class="nav navbar-nav navbar-right">
+          <% if current_user %>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hello <%= current_user.name || current_user.email %>!<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Your Wikis", current_user %></li>
+              <li><%= link_to "Your Account", edit_user_registration_path %></li>
+            </ul>
+          </li>
+          <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+
+          <% else %>
+
+          <li><%= link_to "Sign In", new_user_session_path %></li>
+
+          <% end %>
+        </ul>
+
+      </div>
+    </div>
+
     <% if flash[:notice] %>
-         <div class="alert alert-success">
-           <button type="button" class="close" data-dismiss="alert">&times;</button>
-           <%= flash[:notice] %>
-         </div>
-       <% elsif flash[:error] %>
-         <div class="alert alert-danger">
-           <button type="button" class="close" data-dismiss="alert">&times;</button>
-           <%= flash[:error] %>
-         </div>
-       <% elsif flash[:alert] %>
-         <div class="alert alert-warning">
-           <button type="button" class="close" data-dismiss="alert">&times;</button>
-           <%= flash[:alert] %>
-         </div>
-       <% end %>
-	
-<%= yield %>
+      <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:notice] %>
+      </div>
+    <% elsif flash[:error] %>
+      <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:error] %>
+      </div>
+    <% elsif flash[:alert] %>
+      <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
 
-	</div>
+    <%= yield %>
+
+  </div>
 </body>
 </html>

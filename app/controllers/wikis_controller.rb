@@ -1,14 +1,14 @@
 class WikisController < ApplicationController
-	
+
 	def index
 		@wikis = Wiki.paginate(page: params[:page], per_page: 10)
 		authorize @wikis
 	end
 	
 	def show
-      # check_membership
 		@wiki = Wiki.find(params[:id])
 		@collaborations = @wiki.users
+      check_membership
 	end
 	
 	def new
@@ -68,11 +68,12 @@ class WikisController < ApplicationController
 	 end
 
 	def check_membership
-      if current_user == nil && !wiki.public?
+      if current_user == nil && !@wiki.public?
+         flash[:notice] = "Premium members can see private wikis. Become a member today!"
          redirect_to new_user_registration_path
+      elsif current_user && !@wiki.public?
          flash[:notice] = "Premium members can see private wikis."
-      elsif current_user && !wiki.public?
-         flash[:notice] = "Premium members can see private wikis."
+         redirect_to new_plans_path
       end
    end
 end
