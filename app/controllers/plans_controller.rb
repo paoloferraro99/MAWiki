@@ -3,7 +3,7 @@ class PlansController < ApplicationController
   before_action :check_membership
 
 # new
-    # will reender a page asking a user if he wants to be premium or not
+    # will render a page asking a user if he wants to be premium or not
 
 # create
     # if user chose free, set his role to free

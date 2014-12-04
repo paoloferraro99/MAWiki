@@ -8,7 +8,7 @@ class WikisController < ApplicationController
 	def show
 		@wiki = Wiki.find(params[:id])
 		@collaborations = @wiki.users
-      check_membership
+      check_if_private_viewable
 	end
 	
 	def new
@@ -67,13 +67,14 @@ class WikisController < ApplicationController
    	params.require(:wiki).permit(:title, :outline, :body, :public)
 	 end
 
-	def check_membership
+	def check_if_private_viewable
       if current_user == nil && !@wiki.public?
          flash[:notice] = "Premium members can see private wikis. Become a member today!"
          redirect_to new_user_registration_path
-      elsif current_user && !@wiki.public?
-         flash[:notice] = "Premium members can see private wikis."
+      elsif (current_user && current_user.role != 'premium') && !@wiki.public?
+         flash[:notice] = "You're a basic member. Premium members can see private wikis."
          redirect_to new_plans_path
       end
    end
+
 end
