@@ -6,7 +6,9 @@ class CollaborationsController < ApplicationController
     @wiki = Wiki.find(params[:collaboration][:wiki_id])
 
     if params[:collaboration][:user_email].present?
+
       user = User.where(:email => params[:collaboration][:user_email]).first
+
       if user.present? && @wiki.collaborations.where(:user_id => user.id).first.blank?
         @wiki.users << user
         flash[:notice] = "Collaborator successfully added."
@@ -16,13 +18,15 @@ class CollaborationsController < ApplicationController
         flash[:error] = "Collaborator not found.  Try again please."
       end
     end
-    redirect_to edit_wiki_path(@wiki)
+    # redirect_to edit_wiki_path(@wiki)
     ## redirect_to @wiki
-
+      
     # AJAX _____
-    # respond_with(@comment) do |format|
-    #   format.html { redirect_to edit_wiki_path(@wiki) }
-    # end
+    @collaborator = user
+    
+    respond_with(user) do |format|
+      format.html { redirect_to edit_wiki_path(@wiki) }
+    end
   end    
 
 

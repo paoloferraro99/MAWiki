@@ -1,10 +1,19 @@
+<% if @collaborations.empty? %>No collaborators yet.<% end %>
 
 <% @wiki.collaborations.each do |collaboration| %>
 
    <%= content_tag :div, id: "collaboration-#{collaboration.id}" do %>
       <li>
+        
          <%= collaboration.user.name %> ( <%= collaboration.user.email %> )<%= link_to "Delete", collaboration_path(collaboration), method: :delete, remote: true %>
+
       </li>
    <% end %>
 
+
+
 <% end %>
+  
+<!-- temporary placement until clarification -->
+<div class="collab">
+</div>
