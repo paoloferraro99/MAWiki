@@ -22,7 +22,10 @@ class CollaborationsController < ApplicationController
     ## redirect_to @wiki
       
     # AJAX _____
+
+  # the ajay seems to be responding to this variable, when i change it the ajax is formatted differently
     @collaborator = user
+    # ################### the _collaborator partial was not getting rendered at all for the way we discused
     
     respond_with(user) do |format|
       format.html { redirect_to edit_wiki_path(@wiki) }
